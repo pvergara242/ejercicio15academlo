@@ -23,11 +23,20 @@ app.get('/inicio', (request, response) => {
 app.post('/login', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
-    fs.readFile('db.json',(req,res)=>{
+    fs.readFile('db.json',(error,data)=>{
         let users = JSON.parse(data.toString());
+        let userObj = users.find(user=>{
+            return user.email = email;
+        });
+        if(userObj.password === password  ){
+            console.log('la contraseña es correcta')
+        }else if(userObj.password  !=password){
+            console.log('no coincide');
+            res.sendfile('./public/login.html');
+        }
         console.log(users)
     })
-    res.redirect('./public/index.html');
+    res.sendfile(__dirname + "/public/index.html");
 });
 
 // error 404
