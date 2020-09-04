@@ -29,14 +29,15 @@ app.post('/login', (req, res) => {
             return user.email = email;
         });
         if(userObj.password === password  ){
-            console.log('la contraseña es correcta')
-        }else if(userObj.password  !=password){
+            console.log('la contraseña es correcta');
+            res.sendfile(__dirname + "/public/index.html");
+        }else{
             console.log('no coincide');
-            res.sendfile('./public/login.html');
+            res.sendfile(__dirname + "/public/login.html");
         }
         console.log(users)
     })
-    res.sendfile(__dirname + "/public/index.html");
+    
 });
 
 // error 404
